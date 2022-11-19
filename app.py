@@ -3,6 +3,7 @@ from flask import request
 import decimal
 from decimal import Decimal
 import mysql.connector
+from mysql.connector import pooling
 
 app = Flask(
     __name__,
@@ -11,6 +12,8 @@ app = Flask(
 )
 app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+# Json檔案不要按照字母順序
+app.config['JSON_SORT_KEYS'] = False
 
 taipeiPool = mysql.connector.pooling.MySQLConnectionPool(
     pool_name="connectionPool",
@@ -75,23 +78,37 @@ def attraction():
     spot = {}
     spotInfoWithKey = []
     imgList = []
+    # 顯示每頁幾筆，然後用slice的方式抓出來
+    page = request.args.get("page", 0)
+    attractionPerPage = 12
     keyword = request.args.get("keyword")
+
     mydb = taipeiPool.get_connection()
     cur = mydb.cursor()
+
+
     if keyword is not None:
         cur.execute(
             "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info WHERE CAT=%s;", [keyword])
-    else:
+        info = cur.fetchall()
+        if (int(page)+1) * attractionPerPage < len(info):
+            nextpage = int(page)+1
+        else:
+            nextpage = None
         cur.execute(
-            "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info ")
-    info = cur.fetchall()
-    # info是一個串列格式，裡面放tuple
-    attractionPerPage = 12
-    # 顯示每頁幾筆，然後用slice的方式抓出來
-    page = request.args.get("page", 0)
-    startIndex = int(page) * attractionPerPage
-    EndIndex = startIndex + attractionPerPage
-    spotInfo = info[startIndex:EndIndex]
+            "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info WHERE CAT=%s LIMIT %s, %s;", (keyword, (int(page)*12), 12))
+    else:
+        # 取得總筆數
+        cur.execute(
+            "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info")
+        info = cur.fetchall()
+        if (int(page)+1) * attractionPerPage < len(info):
+            nextpage = int(page)+1
+        else:
+            nextpage = None
+        cur.execute(
+                "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info LIMIT %s, %s;", ((int(page)*12), 12))
+    spotInfo = cur.fetchall()
     # 新增字典最後再append到串列裡
     for i in spotInfo:
         # 新增一個圖片的串列
@@ -101,16 +118,15 @@ def attraction():
         for img in imgAddress:
             string = ''.join(img)
             imgList.append("https://" + string)
-        spot["_id"] = i[0]
-        spot["CAT"] = i[1]
-        spot["MEMO_TIME"] = i[2]
-        spot["MRT"] = i[3]
-        spot["address"] = i[4]
-        spot["description"] = i[5]
-        spot["direction"] = i[6]
-        spot["latitude"] = float(str(i[7]))
-        spot["longitude"] = float(str(i[8]))
+        spot["id"] = i[0]
         spot["name"] = i[9]
+        spot["category"] = i[1]
+        spot["description"] = i[5]
+        spot["address"] = i[4]
+        spot["trasnport"] = i[6]
+        spot["mrt"] = i[3]
+        spot["lat"] = float(str(i[7]))
+        spot["lng"] = float(str(i[8]))
         spot["image"] = imgList
         dictCopy = spot.copy()
         spot = {}
@@ -118,10 +134,7 @@ def attraction():
 
         spotInfoWithKey.append(dictCopy)
 
-    if (int(page)+1) * attractionPerPage < len(info):
-        nextpage = int(page)+1
-    else:
-        nextpage = None
+
     mydb.close()
     cur.close()
     try:
@@ -150,17 +163,16 @@ def specificAttraction(id):
             for img in imgAddress:
                 string = ''.join(img)
                 imgList.append("https://" + string)
-            spot["_id"] = spotInfo[0][0]
-            spot["CAT"] = spotInfo[0][1]
-            spot["MEMO_TIME"] = spotInfo[0][2]
-            spot["MRT"] = spotInfo[0][3]
-            spot["address"] = spotInfo[0][4]
+            spot["id"] = spotInfo[0][0]
+            spot["category"] = spotInfo[0][1]
             spot["description"] = spotInfo[0][5]
-            spot["direction"] = spotInfo[0][6]
-            spot["latitude"] = float(str(spotInfo[0][7]))
-            spot["longitude"] = float(str(spotInfo[0][8]))
-            spot["name"] = spotInfo[0][9]
+            spot["address"] = spotInfo[0][4]
+            spot["transport"] = spotInfo[0][6]
+            spot["mrt"] = spotInfo[0][3]
+            spot["lat"] = float(str(spotInfo[0][7]))
+            spot["lng"] = float(str(spotInfo[0][8]))
             spot["image"] = imgList
+            spot["name"] = spotInfo[0][9]
             return jsonify({"data": spot})
         else:
             return jsonify({"error": True, "message": "請輸入正確景點編號"})
@@ -172,4 +184,4 @@ def specificAttraction(id):
         mydb.close()
 
 
-app.run(port=3000)
+app.run(host='0.0.0.0',port=3000)
