@@ -1,0 +1,320 @@
+html,
+body {
+  font-family: 'Noto Sans TC';
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #666666
+}
+
+
+header {
+  height: 54px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 54px;
+  margin: 0 auto;
+  width: 1200px;
+
+}
+
+h2 {
+  font-weight: bold;
+  color: #448899;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34px;
+  cursor: pointer;
+}
+
+.item-section {
+  display: flex;
+}
+
+.item {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 13px;
+  color: #666666;
+  padding: 10px;
+}
+
+.taipei {
+  background-image: url(http://54.150.244.240:3000/picture/welcome.png);
+  height: 320px;
+  width: 100%;
+  background-size: cover;
+  background-position: center top;
+  display: flex;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.title {
+  margin: 0 auto;
+  width: 1200px;
+  padding-top: 85px;
+  color: #f8f8f8
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchbg {
+  max-width: 400px;
+  height: 46px;
+  background-color: #ffffff;
+}
+
+#search-button {
+  border-radius: 0 5px 5px 0;
+}
+
+.search-bar {
+  border: none;
+  border-radius: 5px 0 0 5px;
+  padding: 0;
+  width: 370px;
+  height: 16px;
+  padding: 15px;
+
+}
+
+.searching-cat {
+  margin-top: 5px;
+  width: 400px;
+  height: 162px;
+  box-shadow: 0px 0px 20px #AABBCC;
+  border-radius: 5px;
+  background-color: #ffffff;
+  z-index: 9999;
+  position: relative;
+  flex-wrap: wrap;
+  display: none;
+}
+
+.categories {
+  color: #000000;
+  font-size: 15px;
+  width: 120px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: none;
+}
+
+.categories:hover {
+  background-color: #e8e8e8;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cat-text {
+  padding-left: 15px;
+}
+
+#search-button {
+  width: 60px;
+  height: 46px;
+  border: none;
+  background-color: #448899;
+}
+
+
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 55px;
+
+}
+
+.attraction-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px
+}
+
+.attraction {
+  width: 270px;
+  height: 242px;
+  /* margin: 0 0 30px 0; */
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.attraction-pic {
+  background-size: cover;
+  background-position: center center;
+  width: 270px;
+  height: 197px;
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 5px 5px 0 0;
+}
+
+.image-below {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 5px;
+
+}
+
+.name-back {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(0, 0, 0, 0.6);
+  position: relative;
+  bottom: -157px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.name {
+  width: 250px;
+  height: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.mrt {
+  width: 125x;
+  height: 25px;
+  margin-left: 10px;
+}
+
+.category {
+  width: 125x;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.footer {
+  width: 100%;
+  height: 104px;
+  background-color: #757575;
+  margin: 0 auto;
+  color: #FFFFFF;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.last-card {
+  border: 3px solid red;
+}
+
+
+
+
+.no-result {
+  display: none;
+}
+
+@media (max-width:1200px) {
+  main {
+    max-width: 90%;
+  }
+
+  .navbar {
+    width: 90%;
+  }
+
+  .title {
+    width: 90%;
+  }
+
+  .input-group {
+    width: 90%;
+  }
+
+  .searchbg {
+    width: 65%;
+  }
+
+
+  .search-bar {
+    width: 340px;
+
+  }
+
+  .attraction {
+    width: 45%;
+  }
+
+  .attraction-pic {
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .name-back {
+
+    justify-content: flex-start;
+
+  }
+
+  .name {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  main {
+    max-width: 90%;
+  }
+
+  .searchbg {
+    width: 230px;
+    height: 46px;
+
+    background-color: #ffffff;
+  }
+
+  .attraction {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .title {
+    width: 90%;
+  }
+
+  .search-bar {
+    width: 195px;
+    height: 16px;
+  }
+}

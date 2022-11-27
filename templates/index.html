@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taipei trip 台北一日遊2.0</title>
+  <link rel="stylesheet" href="/stylesheets/home.css">
+</head>
+
+<body class="body">
+
+  <header>
+    <nav class="navbar">
+      <h2 onclick="window.location='/';">台北一日遊</h2>
+      <div class="item-section">
+        <div class="item">預定行程</div>
+        <div class="item">登入/註冊</div>
+      </div>
+    </nav>
+  </header>
+  <div class="taipei">
+    <div class="title">
+      <h1>輕鬆享受台北一日悠閒</h1>
+      <p>探索每個角落，體驗城市的深度旅遊行程</p>
+      <!-- 輸入景點名稱查詢 -->
+      <div class="input-group">
+        <div class="searchbg">
+          <input type="text" name="keyword" class="search-bar" placeholder="輸入景點名稱查詢" aria-describedby="search-button">
+        </div>
+        <div class="input-icon">
+          <button type="button" id="search-button" onclick="getAttraction()"><img src="/picture/search.png"></button>
+        </div>
+      </div>
+      <div class="searching-cat">
+        <!-- <button type="button" class="categories">
+          <div class="cat-text">戶外踏青</div>
+        </button> -->
+        <!-- <div class="categories"><div class="cat-text">公共藝術</div></div> -->
+      </div>
+    </div>
+  </div>
+  <main class="attraction-list">
+    <div class="attraction-card">
+      <!-- 景點列表 -->
+      <!-- <div class="attraction">
+        <div class="attraction-pic"
+          style="background-image: url(https://media.istockphoto.com/id/636379014/photo/hands-forming-a-heart-shape-with-sunset-silhouette.jpg?s=612x612&w=0&k=20&c=CgjWWGEasjgwia2VT7ufXa10azba2HXmUDe96wZG8F0=);">
+          <div class="name-back">
+            <div class="name">勇士隊</div>
+          </div>
+        </div>
+        <div class="image-below">
+          <div class="mrt">忠孝復興</div>
+          <div class="category">公共藝術</div>
+        </div>
+      </div>
+    </div> -->
+    <div class="no-result">
+      沒有結果，請重新輸入類別
+    </div>
+  </main>
+  <div class="footer">
+    COPYRIGHT © 2021 台北一日遊
+  </div>
+  <script src="/javascripts/trip.js"></script>
+</body>
+
+</html>

@@ -21,15 +21,15 @@ taipeiPool = mysql.connector.pooling.MySQLConnectionPool(
     pool_reset_session=True,
     host='localhost',
     database='taipeitrip',
-    user='root',
+    user='user',
     password='1qaz@WSX')
 
 # Pages
 
 
-# @app.route("/")
-# def index():
-#     return render_template("index.html")
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 
 # @app.route("/attraction/<id>")
@@ -185,3 +185,4 @@ def specificAttraction(id):
 
 
 app.run(host='0.0.0.0',port=3000)
+# app.run(port=3000)
