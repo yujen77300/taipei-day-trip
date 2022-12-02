@@ -7,6 +7,8 @@ let searchBar = document.querySelector('.search-bar')
 let title = document.querySelector('.title')
 let noReuslt = document.querySelector('.no-result')
 
+
+
 // 是否有載入
 let isLoading = 1
 // 是否有搜尋
@@ -18,7 +20,7 @@ let isSearchingCat = 0
 window.onload = function () {
 
   document.onclick = function (div) {
-    console.log(div.target.className)
+    // console.log(div.target.className)
     if (div.target.className != "searching-cat" && div.target.className != "search-bar") {
       searchingCat.style.display = "none"
       // searchingCat.style.visibility = "hidden"
@@ -34,7 +36,7 @@ searchBar.addEventListener('click', () => {
   if (isSearchingCat == 0) {
     let categories = []
     fetch(
-      "http://54.150.244.240:3000/api/categories"
+      "/api/categories"
     ).then(function (response) {
       return response.json();
     }).then(function (data) {
@@ -71,8 +73,10 @@ function renderAttractionList(touristSpot, keyword) {
     touristSpot.forEach(spot => {
       let attraction = document.createElement('div')
       attraction.className = "attraction"
+      attraction.setAttribute("onclick", `window.location='/attraction/${spot["id"]}';`)
+      // attraction.setAttribute('data-id', `${spot["id"]}`)
       attraction.innerHTML = `
-          <div class="attraction-pic" style="background-image: url(${spot["image"][0]});">
+          <div class="attraction-pic" style="background-image: url(${spot["image"][0]});" >
             <div class="name-back">
               <div class="name">${spot['name']}</div>
             </div>
@@ -89,6 +93,10 @@ function renderAttractionList(touristSpot, keyword) {
     touristSpot.forEach(spot => {
       let attraction = document.createElement('div')
       attraction.className = "attraction"
+      // 讓前端可以運用dataset的方法來抓特定景點id
+      // attraction.setAttribute('data-id', `${spot["id"]}`)
+      attraction.setAttribute("onclick", `window.location='/attraction/${spot["id"]}';`)
+
       attraction.innerHTML = `
         <div class="attraction-pic" style="background-image: url(${spot["image"][0]});">
           <div class="name-back">
@@ -137,25 +145,25 @@ function fetchImages(touristSpot, keyword) {
     // 如果沒有輸入任何字，從原先一開始的資料載入
     if (keyword.length == 0 && zeroIpunt == 0) {
       page = 0
-      url = `http://54.150.244.240:3000/api/attractions?page=${page}`
+      url = `/api/attractions?page=${page}`
       // 重新變成1才可以繼續載入
       isLoading = 1
       zeroIpunt++
     } else if (keyword.length == 0 && zeroIpunt > 0) {
-      url = `http://54.150.244.240:3000/api/attractions?page=${page}`
+      url = `/api/attractions?page=${page}`
     } else {
       if (isSearching == 0) {
         page = 0
         // 重新變成1才可以繼續載入
         isLoading = 1
-        url = `http://54.150.244.240:3000/api/attractions?page=${page}&keyword=${keyword}`
+        url = `/api/attractions?page=${page}&keyword=${keyword}`
       } else {
-        url = `http://54.150.244.240:3000/api/attractions?page=${page}&keyword=${keyword}`
+        url = `/api/attractions?page=${page}&keyword=${keyword}`
       }
     }
 
   } else {
-    url = `http://54.150.244.240:3000/api/attractions?page=${page}`
+    url = `/api/attractions?page=${page}`
   }
   fetch(
     url
@@ -227,3 +235,8 @@ function getAttraction() {
 function getCategory(category) {
   searchBar.value = category
 }
+
+// let attraction = document.querySelector('.attraction')
+// attraction.addEventListener('click', e => {
+//   console.log(e.target)
+// })

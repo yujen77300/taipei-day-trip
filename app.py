@@ -32,9 +32,17 @@ def index():
     return render_template("index.html")
 
 
-# @app.route("/attraction/<id>")
-# def attraction(id):
-#     return render_template("attraction.html")
+@app.route("/attraction/<id>")
+def attractionnn(id):
+    # 如果從後端做
+    # src = "http://127.0.0.1:3000/api/attraction/"+id
+    # with urllib.request.urlopen(src) as response:
+    #     data = json.load(response)
+    # print(data)
+    # # 取得照片的串列
+    # photo = data['data']["image"]
+    # return render_template("attraction.html", information=data, photo=photo)
+    return render_template("attraction.html")
 
 
 # @app.route("/booking")
@@ -86,7 +94,6 @@ def attraction():
     mydb = taipeiPool.get_connection()
     cur = mydb.cursor()
 
-
     if keyword is not None:
         cur.execute(
             "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info WHERE CAT=%s;", [keyword])
@@ -107,7 +114,7 @@ def attraction():
         else:
             nextpage = None
         cur.execute(
-                "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info LIMIT %s, %s;", ((int(page)*12), 12))
+            "SELECT _id, CAT, MEMO_TIME, MRT, address, description, direction, latitude, longitude, name FROM spot_info LIMIT %s, %s;", ((int(page)*12), 12))
     spotInfo = cur.fetchall()
     # 新增字典最後再append到串列裡
     for i in spotInfo:
@@ -133,7 +140,6 @@ def attraction():
         imgList = []
 
         spotInfoWithKey.append(dictCopy)
-
 
     mydb.close()
     cur.close()
@@ -184,5 +190,5 @@ def specificAttraction(id):
         mydb.close()
 
 
-app.run(host='0.0.0.0',port=3000)
+app.run(host='0.0.0.0', port=3000)
 # app.run(port=3000)
