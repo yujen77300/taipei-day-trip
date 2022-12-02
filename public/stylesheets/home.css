@@ -51,7 +51,7 @@ h2 {
 }
 
 .taipei {
-  background-image: url(http://54.150.244.240:3000/picture/welcome.png);
+  background-image: url(/picture/welcome.png);
   height: 320px;
   width: 100%;
   background-size: cover;
@@ -163,6 +163,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 
@@ -230,6 +231,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 55px;
 }
 
 .last-card {
