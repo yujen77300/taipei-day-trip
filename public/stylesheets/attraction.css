@@ -50,6 +50,7 @@ h2 {
   line-height: 13px;
   color: #666666;
   padding: 10px;
+  cursor: pointer;
 }
 
 .attraction-middle {
@@ -341,6 +342,277 @@ hr {
   justify-content: center;
   align-items: center;
 }
+
+/* 彈出視窗 */
+/* * {
+  box-sizing: border-box;
+} */
+
+
+.popup {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: -150%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.25);
+  /* top: 18%;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); */
+  width: 340px;
+  /* height: 275px; */
+  padding: 0 15px 0 15px;
+  background: #fff;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0, 0.15);
+  border-radius: 6px;
+  transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms,
+    transform 20ms ease-in-out 0ms;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .5));
+}
+
+.popup.active {
+  top: 22%;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  /* 比背景還上面，避免變黑 */
+  z-index: 9999;
+  background-color: #fff;
+  transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms,
+    transform 20ms ease-in-out 0ms;
+}
+
+.body.popupactive {
+  overflow: hidden;
+  background-color: rgba(15, 15, 15);
+  z-index: 9900;
+  font-family: 'Noto Sans TC';
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.popup .close-btn {
+  background-color: #fff;
+  position: absolute;
+  border: none;
+  padding: 0;
+  top: 27px;
+  right: 17px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.login-bar {
+  width: 340px;
+  height: 10px;
+  background: linear-gradient(to right, #66aabb, #337788);
+  /*   讓bar移動回中間 */
+  margin-right: -15px;
+  margin-left: -15px;
+  border-radius: 6px 6px 0 0;
+}
+
+.login-title {
+  /*     outline:3px solid red; */
+  text-align: center;
+  font-weight: bold;
+  color: #666666;
+  margin-bottom: 15px;
+  font-size: 24px;
+  height: 27px;
+}
+
+.popup .form {
+  margin-top: 15px;
+}
+
+.popup .form .form-element {
+  margin-top: 10px;
+}
+
+.popup .form .form-element input[type="email"] {
+  display: block;
+  width: 280px;
+  padding: 15px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.popup .form .form-element input[type="password"] {
+  display: block;
+  width: 280px;
+  padding: 15px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.popup .form .form-element button {
+  height: 40px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #448899;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+.popup .form .form-element a {
+  /*   display: block; */
+  /*   text-align: right; */
+  /*   font-size: 15px; */
+  color: #666666;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#login-fail,
+#signup-fail {
+  text-align: center;
+  color: red;
+}
+
+#signup-success {
+  text-align: center;
+  color: green;
+}
+
+
+/* 彈出式註冊式窗 */
+
+.signup {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: -150%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.25);
+  /* top: 22%;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); */
+  width: 340px;
+  /* height: 332px; */
+  padding: 0 15px 0 15px;
+  background: #fff;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0, 0.15);
+  border-radius: 6px;
+  transition: top 0ms ease-in-out 200ms, opacity 200ms ease-in-out 0ms,
+    transform 20ms ease-in-out 0ms;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .5));
+}
+
+.signup.active {
+  top: 22%;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  /* 比背景還上面，避免變黑 */
+  z-index: 9999;
+  background-color: #fff;
+  transition: top 0ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms,
+    transform 20ms ease-in-out 0ms;
+}
+
+.signup.popupactive {
+  overflow: hidden;
+  background-color: rgba(15, 15, 15);
+  z-index: 9900;
+  font-family: 'Noto Sans TC';
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.signup .close-btn {
+  background-color: #fff;
+  position: absolute;
+  border: none;
+  padding: 0;
+  top: 27px;
+  right: 17px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.login-bar {
+  width: 340px;
+  height: 10px;
+  background: linear-gradient(to right, #66aabb, #337788);
+  /*   讓bar移動回中間 */
+  margin-right: -15px;
+  margin-left: -15px;
+  border-radius: 6px 6px 0 0;
+}
+
+.login-title {
+  /*     outline:3px solid red; */
+  text-align: center;
+  font-weight: bold;
+  color: #666666;
+  margin-bottom: 15px;
+  font-size: 24px;
+  height: 27px;
+}
+
+.signup .form {
+  margin-top: 15px;
+}
+
+.signup .form .form-element {
+  margin-top: 10px;
+}
+
+.signup .form .form-element input[type="text"] {
+  display: block;
+  width: 280px;
+  padding: 15px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+
+.signup .form .form-element input[type="email"] {
+  display: block;
+  width: 280px;
+  padding: 15px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.signup .form .form-element input[type="password"] {
+  display: block;
+  width: 280px;
+  padding: 15px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.signup .form .form-element button {
+  height: 40px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #448899;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+.signup .form .form-element a {
+  color: #666666;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+
+
+
 
 
 @media (max-width:1200px) {

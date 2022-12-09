@@ -13,13 +13,59 @@
 
   <header>
     <nav class="navbar">
-      <h2 onclick="window.location='/';">台北一日遊</h2>
+      <h2 onclick="window.location='/'">台北一日遊</h2>
       <div class="item-section">
-        <div class="item">預定行程</div>
-        <div class="item">登入/註冊</div>
+        <div class="item" id="schedule-btn">預定行程</div>
+        <div class="item" id="login-logout">登入/註冊</div>
       </div>
     </nav>
   </header>
+  <div class="popup">
+    <div class=login-bar></div>
+    <div class="form">
+      <div class="login-title">登入會員帳號<button type="button" class="close-btn"><img src="/picture/close.png"></button>
+      </div>
+      <div class="form-element">
+        <input type="email" id="login-email" placeholder="輸入電子信箱">
+      </div>
+      <div class="form-element">
+        <input type="password" id="login-password" placeholder="輸入密碼">
+      </div>
+      <div class="form-element">
+        <button id="login-btn" onclick="login()">登入帳戶</button>
+      </div>
+      <div id="login-fail" class="form-element"></div>
+      <div class="form-element" style="text-align:center; display: flex;justify-content: center;margin-bottom: 10px;">
+        <div>還沒有帳戶&ensp;?&ensp;</div>
+        <div id="signup-btn" style="cursor:pointer" onclick="tosignup()">點此註冊</div>
+      </div>
+    </div>
+  </div>
+  <div class="signup">
+    <div class=login-bar></div>
+    <div class="form">
+      <div class="login-title">註冊會員帳號<button type="button" class="close-btn"><img src="/picture/close.png"></button>
+      </div>
+      <div class="form-element">
+        <input type="text" id="signup-name" placeholder="輸入姓名">
+      </div>
+      <div class="form-element">
+        <input type="email" id="signup-email" placeholder="輸入電子郵件">
+      </div>
+      <div class="form-element">
+        <input type="password" id="signup-password" placeholder="輸入密碼">
+      </div>
+      <div class="form-element">
+        <button id="signupAccount-btn" onclick="signup()">註冊新帳戶</button>
+      </div>
+      <div id="signup-fail" class="form-element"></div>
+      <div id="signup-success" class="form-element"></div>
+      <div class="form-element" style="text-align:center; display: flex;justify-content: center;margin-bottom: 10px;">
+        <div>已經有帳戶了&ensp;?&ensp;</div>
+        <div id="login-btn" style="cursor:pointer" onclick="tologin()">點此登入</div>
+      </div>
+    </div>
+  </div>
   <div class="attraction-middle">
     <div class="container-middle">
       <!-- 投影片開始 -->
@@ -85,6 +131,7 @@
   </div>
 
   <script src="/javascripts/attraction.js"></script>
+  <script src="/javascripts/header.js"></script>
 </body>
 
 </html>
