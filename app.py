@@ -4,6 +4,9 @@ import decimal
 from decimal import Decimal
 import mysql.connector
 from mysql.connector import pooling
+import jwt
+from datetime import datetime, timedelta
+from functools import wraps
 
 app = Flask(
     __name__,
@@ -24,9 +27,8 @@ taipeiPool = mysql.connector.pooling.MySQLConnectionPool(
     user='user',
     password='1qaz@WSX')
 
+
 # Pages
-
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -188,6 +190,104 @@ def specificAttraction(id):
     finally:
         imgCursor.close()
         mydb.close()
+
+# 註冊一個新的會員
+
+
+@app.route("/api/user", methods=["POST"])
+def signup():
+    mydb = taipeiPool.get_connection()
+    cur = mydb.cursor()
+    inputName = request.get_json()["name"]
+    inputEmail = request.get_json()["email"]
+    inputPassword = request.get_json()["password"]
+    cur.execute(
+        "SELECT member_id,name,email,password FROM member WHERE email=%s", [inputEmail])
+    memberInfo = cur.fetchone()
+    try:
+        if memberInfo is not None:
+            return jsonify({"error": True, "message": "註冊失敗，此信箱已被使用"}), 400
+        else:
+            cur.execute("INSERT INTO member(name,email,password) VALUES(%s,%s,%s)",
+                        (inputName, inputEmail, inputPassword))
+            mydb.commit()
+            return jsonify({'ok': True})
+    except Exception as e:
+        return {'error': True, "message": str(e)}
+    finally:
+        cur.close()
+        mydb.close()
+
+# 取得當前登入的會員資訊
+
+
+@app.route("/api/user/auth")
+def member_info():
+    # 取得目前在瀏覽器的token
+    token = request.cookies.get('token')
+    try:
+        data=jwt.decode(token,"dylanwehelp", algorithms="HS256")
+        return jsonify({'data': data}), 200
+    except Exception as e:
+        return {'error': True, "message": str(e)}
+
+
+# 登入會員
+
+
+@app.route("/api/user/auth", methods=["PUT"])
+def login():
+    mydb = taipeiPool.get_connection()
+    cur = mydb.cursor()
+    inputEmail = request.get_json()["email"]
+    inputPassword = request.get_json()["password"]
+    cur.execute(
+        "SELECT member_id,name,email,password FROM member WHERE email=%s and password=%s;", (inputEmail, inputPassword))
+    memberInfo = cur.fetchone()
+
+    try:
+        # if帳號密碼正確
+        if memberInfo is not None:
+            exptime = datetime.now() + timedelta(days=7)
+            exp_epoc_time = exptime.timestamp()
+            payload_data = {}
+            payload_data["id"] = memberInfo[0]
+            payload_data["name"] = memberInfo[1]
+            payload_data["email"] = memberInfo[2]
+            # payload_data["exp"] = int(exp_epoc_time)
+            # print(payload_data)
+            encoded_jwt = jwt.encode(
+                payload=payload_data, key="dylanwehelp", algorithm="HS256")
+            # 登入成功，使用 JWT 加密資訊並存放到 Cookie 中，保存七天
+            response = make_response(jsonify({"ok": True}), 200)
+            response.set_cookie(key='token', value=encoded_jwt,
+                                expires=exp_epoc_time, httponly=True)
+            return response
+
+        else:
+            print("失敗了")
+            return jsonify({"error": True, "message": "帳號或密碼輸入錯誤"}), 400
+
+#   "message": "請按照情境提供對應的錯誤訊息")
+    except Exception as e:
+        return {'error': True, "message": str(e)}
+    finally:
+        cur.close()
+        mydb.close()
+
+
+# #登出會員
+@app.route("/api/user/auth", methods=["DELETE"])
+def logout():
+    try:
+        # 先取得token
+        token = request.cookies.get('token')
+        response = make_response(jsonify({"ok": True}), 200)
+        # 登出成功，從 Cookie 中移除 JWT 加密資訊
+        response.set_cookie(key='token', value=token, expires=0, httponly=True)
+        return response
+    except Exception as e:
+        return {'error': True, "message": str(e)}
 
 
 app.run(host='0.0.0.0', port=3000)
