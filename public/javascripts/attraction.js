@@ -5,6 +5,9 @@ let slide = document.querySelector('.slide')
 let fee = document.querySelector('.fee')
 let controlsVisible = document.querySelector('.controls-visible')
 let firstSlide = document.querySelector('#firstSlide')
+let bookingButton = document.querySelector('.booking-button')
+let tripDate = document.getElementById("trip-date")
+let bookingFail = document.getElementById('booking-fail')
 // 取得id的資料
 let id = window.location.href.split("/").slice(-1)[0]
 const url = "/api/attraction/" + id;
@@ -145,7 +148,61 @@ function rightShift() {
 }
 
 
+// 預訂行程
+bookingButton.addEventListener('click', function () {
+  fetch(
+    "/api/user/auth"
+  ).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    if (data.data != undefined) {
+      // 如果驗證的api有存在資料就跳到預訂行程
+      newBookingData = {}
+      newBookingData["attractionId"] = id
+      newBookingData["date"] = tripDate.value
+      if (parseInt((fee.textContent).substr(3, 4), 0) == 2500) {
+        newBookingData["time"] = "afternoon"
+      } else {
+        newBookingData["time"] = "morning"
+      }
+      newBookingData["price"] = parseInt((fee.textContent).substr(3, 4), 0)
+      bookNewSchedule(newBookingData)
+
+    } else {
+      document.querySelector(".popup").classList.add("active");
+      background = document.createElement('div')
+      background.className = "background"
+      background.style.cssText = 'background-color: rgba(15, 15, 15, 0.25);z-index:1;position:absolute;left:0;right:0;top:0;bottom:0;'
+      body.appendChild(background)
+      body.style.overflow = "hidden"
+    }
+  })
+})
 
 
 
-
+async function bookNewSchedule(data) {
+  let url = "/api/booking"
+  let options = {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json",
+    }
+  }
+  try {
+    let response = await fetch(url, options);
+    let result = await response.json();
+    if (response.status === 200) {
+      console.log("成功新增")
+      document.location.href = '/booking'
+    } else if (response.status === 400) {
+      console.log(result["message"])
+      bookingFail.textContent=result["message"]
+      bookingFail.style.marginTop="10px"
+      bookingButton.style.marginTop = "10px"
+    }
+  } catch (err) {
+    console.log({ "error": err.message });
+  }
+}

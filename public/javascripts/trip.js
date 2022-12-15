@@ -15,6 +15,8 @@ let signupPassword = document.getElementById("signup-password")
 let signupFail = document.getElementById("signup-fail")
 let signupSuccess = document.getElementById("signup-success")
 let loginLogout = document.getElementById("login-logout")
+// 預定行程
+let scheduleBtn = document.getElementById("schedule-btn")
 
 // 假設有沒有顯示loginpopup視窗
 let loginPopup = 0
@@ -483,6 +485,7 @@ function tologin() {
   signupPassword.value = ""
 }
 
+// 每次載入頁面都要做的驗證
 reload()
 function reload() {
   fetch(
@@ -497,3 +500,24 @@ function reload() {
     }
   })
 }
+
+
+// 預定行程相關
+document.getElementById("schedule-btn").addEventListener('click', function () {
+  fetch(
+    "/api/user/auth"
+  ).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    if (data.data != undefined) {
+      document.location.href = '/booking'
+    } else {
+      document.querySelector(".popup").classList.add("active");
+      background = document.createElement('div')
+      background.className = "background"
+      background.style.cssText = 'background-color: rgba(15, 15, 15, 0.25);z-index:1;position:absolute;left:0;right:0;top:0;bottom:0;'
+      body.appendChild(background)
+      body.style.overflow = "hidden"
+    }
+  })
+})
