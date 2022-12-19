@@ -8,6 +8,7 @@ import jwt
 from datetime import datetime, timedelta
 from functools import wraps
 
+
 app = Flask(
     __name__,
     static_folder="public",
@@ -20,7 +21,7 @@ app.config['JSON_SORT_KEYS'] = False
 
 taipeiPool = mysql.connector.pooling.MySQLConnectionPool(
     pool_name="connectionPool",
-    pool_size=15,
+    pool_size=32,
     pool_reset_session=True,
     host='localhost',
     database='taipeitrip',
@@ -47,9 +48,9 @@ def attractionnn(id):
     return render_template("attraction.html")
 
 
-# @app.route("/booking")
-# def booking():
-#     return render_template("booking.html")
+@app.route("/booking")
+def booking():
+    return render_template("booking.html")
 
 
 # @app.route("/thankyou")
@@ -226,7 +227,7 @@ def member_info():
     # 取得目前在瀏覽器的token
     token = request.cookies.get('token')
     try:
-        data=jwt.decode(token,"dylanwehelp", algorithms="HS256")
+        data = jwt.decode(token, "dylanwehelp", algorithms="HS256")
         return jsonify({'data': data}), 200
     except Exception as e:
         return {'error': True, "message": str(e)}
@@ -255,7 +256,6 @@ def login():
             payload_data["name"] = memberInfo[1]
             payload_data["email"] = memberInfo[2]
             # payload_data["exp"] = int(exp_epoc_time)
-            # print(payload_data)
             encoded_jwt = jwt.encode(
                 payload=payload_data, key="dylanwehelp", algorithm="HS256")
             # 登入成功，使用 JWT 加密資訊並存放到 Cookie 中，保存七天
@@ -265,7 +265,6 @@ def login():
             return response
 
         else:
-            print("失敗了")
             return jsonify({"error": True, "message": "帳號或密碼輸入錯誤"}), 400
 
 #   "message": "請按照情境提供對應的錯誤訊息")
@@ -288,6 +287,102 @@ def logout():
         return response
     except Exception as e:
         return {'error': True, "message": str(e)}
+
+
+@app.route("/api/booking", methods=["GET", "POST", "DELETE"])
+def scheduleBooking():
+    if request.method == "GET":
+        # 看是不是有登入系統
+        token = request.cookies.get('token')
+        if token is not None:
+            # 取得id
+            data = jwt.decode(token, "dylanwehelp", algorithms="HS256")
+            userId = data["id"]
+            # 取得尚未下單預訂行程
+            mydb = taipeiPool.get_connection()
+            cur = mydb.cursor()
+            cur.execute(
+                "SELECT spot_info._id,spot_info.name,spot_info.address,image.file,cart.date,cart.time,cart.price,cart.memberID FROM cart_spotinfo join spot_info on cart_spotinfo.spotId=spot_info._id join cart on cart_spotinfo.cartId=cart.id join image on cart_spotinfo.spotId=image._id where cart.memberId = %s LIMIT 1", [userId])
+            bookingInfo = cur.fetchone()
+            data = {}
+            if bookingInfo is not None:
+                try:
+                    attraction = {}
+                    attraction["id"] = bookingInfo[0]
+                    attraction["name"] = bookingInfo[1]
+                    attraction["address"] = bookingInfo[2]
+                    attraction["image"] = "https://"+bookingInfo[3]
+                    data["attraction"] = attraction
+                    data["date"] = bookingInfo[4].strftime('%Y-%m-%d')
+                    data["time"] = bookingInfo[5]
+                    data["price"] = int(bookingInfo[6])
+                    return jsonify({'data': data}), 200
+                except Exception as e:
+                    return {'error': True, "message": str(e)}
+                finally:
+                    cur.close()
+                    mydb.close()
+            else:
+                # 這是沒有資料的
+                return jsonify({'data': data}), 200
+        else:
+            return jsonify({"error": True, "message": "未登入系統，請先登入會員"}), 403
+
+    elif request.method == "POST":
+        token = request.cookies.get('token')
+        data = jwt.decode(token, "dylanwehelp", algorithms="HS256")
+        memberId = data["id"]
+        attractionId = request.get_json()["attractionId"]
+        date = request.get_json()["date"]
+        time = request.get_json()["time"]
+        price = request.get_json()["price"]
+        if token is not None and len(date) > 0:
+            try:
+                mydb = taipeiPool.get_connection()
+                cur = mydb.cursor()
+                cur.execute(
+                    "DELETE FROM cart_spotinfo;")
+                cur.execute(
+                    "DELETE FROM cart;")
+            # 建立新的預訂行程
+                cur.execute(
+                    "INSERT INTO cart(memberId,date,time,price) values(%s,%s,%s,%s);", (memberId, date, time, price))
+                cur.execute(
+                    "SELECT cart.id FROM cart")
+                cartId = (cur.fetchone())[0]
+                cur.execute(
+                    "INSERT INTO cart_spotinfo(cartId,spotId) values(%s,%s);", (cartId, attractionId))
+                mydb.commit()
+                return jsonify({"ok": True}), 200
+            except Exception as e:
+                return {'error': True, "message": str(e)}
+            finally:
+                cur.close()
+                mydb.close()
+        elif (token is not None and len(date) == 0):
+            return jsonify({"error": True, "message": "預訂失敗，請選擇日期"}), 400
+        else:
+            return jsonify({"error": True, "message": "未登入系統，請先登入會員"}), 403
+
+    elif request.method == "DELETE":
+        token = request.cookies.get('token')
+        data = jwt.decode(token, "dylanwehelp", algorithms="HS256")
+        # 刪除目前預定的行程
+        # return "刪除預訂行程"
+        if token is not None:
+            try:
+                mydb = taipeiPool.get_connection()
+                cur = mydb.cursor()
+                cur.execute(
+                    "DELETE FROM cart_spotinfo;")
+                cur.execute(
+                    "DELETE FROM cart;")
+                mydb.commit()
+                return jsonify({"ok": True}), 200
+            except Exception as e:
+                return {'error': True, "message": str(e)}
+        else:
+            return jsonify({"error": True, "message": "未登入系統，請先登入會員"}), 403
 
 
 app.run(host='0.0.0.0', port=3000)

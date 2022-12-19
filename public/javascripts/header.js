@@ -8,6 +8,7 @@ let signupPassword = document.getElementById("signup-password")
 let signupFail = document.getElementById("signup-fail")
 let signupSuccess = document.getElementById("signup-success")
 let loginLogout = document.getElementById("login-logout")
+let scheduleBtn = document.getElementById("schedule-btn")
 
 function login() {
   let loginInputEmail = loginEmail.value
@@ -147,6 +148,7 @@ document.querySelector("#login-logout").addEventListener("click", function () {
     return response.json();
   }).then(function (data) {
     if (data.data != undefined) {
+      // 如果有存在資料就登出帳戶
       deleteAccount()
     } else {
       document.querySelector(".popup").classList.add("active");
@@ -218,3 +220,25 @@ function reload() {
     }
   })
 }
+
+// 預訂行程
+document.getElementById("schedule-btn").addEventListener('click', function () {
+  fetch(
+    "/api/user/auth"
+  ).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    if (data.data != undefined) {
+      // 如果有存在資料就跳到預訂行程
+      //這邊還要動用資料庫
+      document.location.href = '/booking'
+    } else {
+      document.querySelector(".popup").classList.add("active");
+      background = document.createElement('div')
+      background.className = "background"
+      background.style.cssText = 'background-color: rgba(15, 15, 15, 0.25);z-index:1;position:absolute;left:0;right:0;top:0;bottom:0;'
+      body.appendChild(background)
+      body.style.overflow = "hidden"
+    }
+  })
+})

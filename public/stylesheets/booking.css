@@ -4,7 +4,8 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px;
-  color: #666666
+  color: #666666;
+  height: 100%;
 }
 
 
@@ -30,6 +31,11 @@ header {
 
 }
 
+.top-title {
+  font-weight: bold;
+  font-size: 19px;
+}
+
 h2 {
   font-weight: bold;
   color: #448899;
@@ -53,295 +59,178 @@ h2 {
   cursor: pointer;
 }
 
-.attraction-middle {
-  margin-top: 37px;
-  display: flex;
-  justify-content: center;
-}
-
-.container-middle {
-  margin-right: 5px;
-  margin-left: 5px;
-  display: flex;
-  gap: 30px;
-
-}
-
-.name {
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.cat-location {
-  margin: 15px 0 20px 0;
-}
-
-/* 圖片輪播開始 */
-
-.slides {
-  height: 406px;
-  width: 540px;
-  position: relative;
-  /* border: solid 3px blue; */
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.slide {
-  /* border: solid 3px red; */
-  margin: 0;
-  padding: 0;
-  width: inherit;
-  height: inherit;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-
-.right-button {
-  z-index: 100;
-  position: absolute;
-  bottom: 50%;
-  padding-right: 10px;
-  right: 0;
-  cursor: pointer;
-
-}
-
-.left-button {
-  z-index: 100;
-  bottom: 50%;
-  position: absolute;
-  padding-left: 10px;
-  cursor: pointer;
-}
-
-/* .slide:nth-of-type(1) {
-  background-image: url(https://www.archkey.com/wp-content/uploads/082521_14-scaled.jpg);
-  background-size: cover;
-  background-position: center center;
-  z-index: -1;
-} */
-
-
-.slide {
-  background-size: cover;
-  background-position: center center;
-  z-index: -1;
-}
-
-input[type="radio"] {
-  z-index: 100;
-  position: relative;
-  display: none;
-}
-
-.controls-visible {
-  position: absolute;
-  width: 100%;
-  bottom: 13px;
-  text-align: center;
-}
-
-label {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #fff;
-  border-radius: 50%;
-  margin: 0 3px;
-  border: 2px solid #fff;
-}
-
-#firstButton {
-  background-color: #000;
-}
-
-/* .slides input[type="radio"]:nth-of-type(1):checked~.controls-visible label:nth-of-type(1) {
-  background-color: #000;
-} */
-
-
-
-.slides input[type="radio"]:nth-of-type(1):checked~.slide {
-  transform: translatex(0%);
-}
-
-
-
-
-/* .controls-visible>* {
-  cursor: pointer;
-} */
-
-/* 圖片輪播結束 */
-
-.booking {
-  width: 600px;
-}
-
-.schedule-booking {
-  background-color: #e8e8e8;
+main {
+  /* margin: 0 auto; */
   display: flex;
   flex-direction: column;
-  width: 600px;
-  height: 310px;
-  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
-.booking-title {
-  margin-left: 20px;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.booking-description {
-  margin-left: 20px;
-  margin-top: 15px;
-}
-
-.booking-date {
-  margin-left: 20px;
-  font-weight: bold;
-  margin-top: 24px;
-}
-
-#trip-date {
-  margin-left: 5px;
-  width: 173px;
-  height: 25px;
-}
-
-
-input[type="date"] {
-  padding: 5px 10px 5px 10px;
-  border: none;
-}
-
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  display: block;
-  background: url(/picture/calendar.png) no-repeat;
-  width: 24px;
-  height: 24px;
-  margin-left: 15px;
-}
-
-.time-item {
-  display: flex;
-  margin-top: 24px;
-}
-
-.time {
-  font-weight: bold;
-  margin-left: 20px;
-}
-
-.booking-fee-item {
-  display: flex;
-  margin-top: 15px;
-}
-
-.booking-fee {
-  font-weight: bold;
-  margin-left: 20px;
-}
-
-
-.morning-section,
-.afternoon-section {
-  display: flex;
-  cursor: pointer;
-}
-
-
-#morning-button {
-  width: 22px;
-  height: 22px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 50%;
-  margin: 0 6px 0 12px;
-}
-
-#morning-button.clicked {
-  width: 18px;
-  height: 18px;
-  background-color: #448899;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  margin: 0 6px 0 12px;
-}
-
-#afternoon-button.clicked {
-  width: 18px;
-  height: 18px;
-  background-color: #448899;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  margin: 0 4px 0 18px;
-}
-
-#afternoon-button {
-  width: 22px;
-  height: 22px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 50%;
-  margin: 0 4px 0 18px;
-}
-
-.booking-button {
-  margin-left: 20px;
-  margin-top: 35px;
-  background-color: #448899;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  width: 154px;
-  height: 36px;
-  font-size: 19px;
-  cursor: pointer;
-}
 
 hr {
   background-color: #E8E8E8;
   Width: 1200px;
-  margin-top: 37px;
+  margin-top: 40px;
+  margin-bottom: 0px;
 }
 
-.attraction-below {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
+.booking-top {
+  width: 1000px;
 
+  margin-top: 46px;
 }
 
-.container-below {
-  max-width: 1180px;
-
-}
-
-
-.address-item,
-.transport-item {
-  margin-top: 20px;
+.booking-title {
+  font-size: 19px;
   font-weight: bold;
 }
 
-#booking-fail{
-  color:red;
-  margin-left: 20px;
+.booking-info {
+  margin-top: 35px;
+  /* outline: 3px solid blue; */
+  display: flex;
+  gap: 22px;
 }
 
+/* .booking-delete {
+  position: relative;
+  top: 50%;
+  right: -39%;
+
+} */
+
+.bookingDelete-btn {
+  cursor: pointer;
+}
+
+.booking-left {
+  /* background-image: url("https://e0.365dm.com/22/12/768x432/skysports-modric-luka-croatia_5991757.jpg?20221209204917"); */
+  height: 200px;
+  width: 266px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.booking-right {
+  /* outline: 3px solid red; */
+  width: 71.4%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-name {
+  font-weight: bold;
+  color: #448899;
+  margin-bottom: 25px;
+}
+
+.schedule-item>.item {
+  padding: 0;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.schedule-item {
+  margin-top: 15px;
+}
+
+
+
+.booking-middle {
+  width: 1000px;
+  margin-top: 44px;
+}
+
+.middle-comment {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+
+.middle-title,
+.bottom-title {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.booking-form>input {
+  outline: none;
+  border: 1px solid #e8e8e8;
+  width: 180px;
+  height: 18px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.booking-form {
+  margin-top: 15px;
+}
+
+.booking-form.first {
+  margin-top: 24px;
+}
+
+.booking-bottom {
+  width: 1000px;
+  margin-top: 44px;
+}
+
+.booking-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 1000px;
+  margin-top: 43px;
+  /* outline: 3px solid red; */
+}
+
+.total-fee {
+  font-weight: bold;
+}
+
+#book-and-pay {
+  padding: 5px 20px;
+  width: 173px;
+  height: 36px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  background-color: #448899;
+  /* line-height: 2px; */
+  margin-top: 25px;
+  cursor: pointer;
+}
+
+/* 如果沒有行程 */
+.no-schedule {
+  margin-top: 35px;
+  display: none;
+}
+
+.booking-info,
+.booking-middle,
+.booking-bottom,
+.booking-total {
+  /* display: none; */
+}
+
+hr {
+  /* display: none; */
+}
+
+
 .footer {
+  /* outline: 3px solid red; */
   width: 100%;
   height: 104px;
   background-color: #757575;
   margin: 0 auto;
-  margin-top: 120px;
+  margin-top: 40px;
   color: #FFFFFF;
   font-weight: bold;
   display: flex;
@@ -349,6 +238,16 @@ hr {
   align-items: center;
 }
 
+.footer-extend {
+  background-color: #757575;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 325px;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
 
 /* 彈出視窗 */
 /* * {
@@ -622,30 +521,18 @@ hr {
 
 
 
-@media (max-width:1200px) {
+@media (max-width:1220px) {
   .navbar {
     width: 91.7%;
   }
 
-  .container-below {
+  .booking-top,
+  .booking-bottom,
+  .booking-middle,
+  .booking-total {
     width: 91.7%;
   }
 
-  .container-middle {
-    width: 91.7%;
-  }
-
-
-  .slide {
-    width: 100%;
-    background-size: cover;
-    background-position: center center;
-  }
-
-  .schedule-booking {
-    width: 100%;
-    height: 310px;
-  }
 
   hr {
     width: 91.7%;
@@ -653,56 +540,32 @@ hr {
 
 }
 
-@media (max-width: 860px) {
-  .container-middle {
-    /* border: 3px solid rgb(221, 23, 185); */
+@media (max-width: 600px) {
+  .booking-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-right: 0;
-    margin-left: 0;
-    gap: 20px;
-    width: 100%;
-
+    /* gap: 22px; */
   }
 
-  .slides {
+  .booking-left {
     width: 100%;
   }
 
-  .attraction-middle {
-    margin-top: 0;
-  }
-
-  .booking {
-    /* border: 3px solid green; */
+  .booking-right {
     width: 100%;
-    /* margin-right: 10px;
-    margin-left: 10px; */
+    /* outline: 3px solid blue; */
   }
 
-  .schedule-booking {
-    width: 94.4%;
-    /* margin-right: 10px;
-    margin-left: 10px; */
-    margin: 0 auto;
+  .booking-details {
+    /* outline: 3px solid green; */
   }
 
-  .cat-location {
-    margin-left: 10px;
-
+  .booking-delete {
+    /* outline: 3px solid red; */
   }
 
-  .name {
-    margin-left: 10px;
-
+  .bookingDelete-btn{
+    position: relative;
+    top:102%;
   }
-
-  .booking-button {
-
-    margin-top: 30px;
-
-  }
-
-
 }

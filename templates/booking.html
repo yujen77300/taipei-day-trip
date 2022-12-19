@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taipei trip 台北一日遊2.0</title>
+  <link rel="stylesheet" href="/stylesheets/booking.css">
+</head>
+
+<body class="body">
+  <header>
+    <nav class="navbar">
+      <h2 onclick="window.location='/'">台北一日遊</h2>
+      <div class="item-section">
+        <div class="item" id="schedule-btn">預訂行程</div>
+        <div class="item" id="login-logout">登入/註冊</div>
+      </div>
+    </nav>
+  </header>
+  <div class="popup">
+    <div class=login-bar></div>
+    <div class="form">
+      <div class="login-title">登入會員帳號<button type="button" class="close-btn"><img src="/picture/close.png"></button>
+      </div>
+      <div class="form-element">
+        <input type="email" id="login-email" placeholder="輸入電子信箱">
+      </div>
+      <div class="form-element">
+        <input type="password" id="login-password" placeholder="輸入密碼">
+      </div>
+      <div class="form-element">
+        <button id="login-btn" onclick="login()">登入帳戶</button>
+      </div>
+      <div id="login-fail" class="form-element"></div>
+      <div class="form-element" style="text-align:center; display: flex;justify-content: center;margin-bottom: 10px;">
+        <div>還沒有帳戶&ensp;?&ensp;</div>
+        <div id="signup-btn" style="cursor:pointer" onclick="tosignup()">點此註冊</div>
+      </div>
+    </div>
+  </div>
+  <div class="signup">
+    <div class=login-bar></div>
+    <div class="form">
+      <div class="login-title">註冊會員帳號<button type="button" class="close-btn"><img src="/picture/close.png"></button>
+      </div>
+      <div class="form-element">
+        <input type="text" id="signup-name" placeholder="輸入姓名">
+      </div>
+      <div class="form-element">
+        <input type="email" id="signup-email" placeholder="輸入電子郵件">
+      </div>
+      <div class="form-element">
+        <input type="password" id="signup-password" placeholder="輸入密碼">
+      </div>
+      <div class="form-element">
+        <button id="signupAccount-btn" onclick="signup()">註冊新帳戶</button>
+      </div>
+      <div id="signup-fail" class="form-element"></div>
+      <div id="signup-success" class="form-element"></div>
+      <div class="form-element" style="text-align:center; display: flex;justify-content: center;margin-bottom: 10px;">
+        <div>已經有帳戶了&ensp;?&ensp;</div>
+        <div id="login-btn" style="cursor:pointer" onclick="tologin()">點此登入</div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="booking-top">
+      <div class="top-title">您好，"名字"，待預訂的行程如下 : </div>
+      <div class="no-schedule">目前沒有任何待預訂的行程</div>
+      <div class="booking-info">
+        <div class="booking-left"></div>
+        <div class="booking-right">
+          <div class="booking-details">
+            <div class="booking-name">台北一日遊 : "平安鐘"</div>
+            <div class="schedule-detail">
+              <div class="schedule-item" id="scheduled-date">
+                <span class="item">日期 : </span>"2021-04-23"
+              </div>
+              <div class="schedule-item" id="scheduled-time">
+                <span class="item">時間 : </span>"早上9點到下午4點"
+              </div>
+              <div class="schedule-item" id="scheduled-fee">
+                <span class="item">費用 : </span>新台幣2000元
+              </div>
+              <div class="schedule-item" id="scheduled-place">
+                <span class="item">地點 : </span>"台北市大安區忠孝東路4段"
+              </div>
+            </div>
+          </div>
+          <div class="booking-delete"><img class="bookingDelete-btn" src="/picture/delete.png"></div>
+        </div>
+
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="booking-middle">
+      <div class="middle-title">您的聯絡資訊</div>
+      <div class="middle-info">
+        <div class="booking-form first">
+          <label for="name">聯絡姓名 : </label>
+          <input type="text" id="scehduled-username" placeholder="使用者的姓名">
+        </div>
+        <div class="booking-form">
+          <label for="email">聯絡信箱 : </label>
+          <input type="email" id="scehduled-email" placeholder="使用者的電子郵件">
+        </div>
+        <div class="booking-form">
+          <label for="phone">手機號碼 : </label>
+          <input type="tel" id="scehduledphone" required>
+        </div>
+      </div>
+      <div class="middle-comment">請保持手機暢通，準時到達，導覽人員將用手機與您聯絡，務必留下正確的聯絡方式</div>
+    </div>
+    <hr class="divider">
+    <div class="booking-bottom">
+      <div class="bottom-title">信用卡付款資訊</div>
+      <div class="payment-info">
+        <div class="booking-form first">
+          <label for="ccn">卡片號碼 : </label>
+          <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number"
+            maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+        </div>
+        <div class="booking-form">
+          <label for="expiry">過期時間 : </label>
+          <input class="inputCard" name="expiry" id="expiry" type="text" placeholder="MM/YY" required>
+          <!-- <input class="inputCard" name="expiry" id="expiry" type="month" placeholder="MM/YY" required> -->
+        </div>
+        <div class="booking-form">
+          <label for="CVV">手機號碼 : </label>
+          <input type="tel" id="CVV" placeholder="CVV" required>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="booking-total">
+      <div class="total-fee">
+        總價 : 新台幣2000元
+      </div>
+      <div class="pay-btn">
+        <button id="book-and-pay">確認訂購並付款</button>
+      </div>
+    </div>
+  </main>
+  <div class="footer">
+    COPYRIGHT © 2021 台北一日遊
+  </div>
+  <div class="footer-extend"></div>
+
+  <script src="/javascripts/booking.js"></script>
+  <script src="/javascripts/header.js"></script>
+</body>
+
+</html>
