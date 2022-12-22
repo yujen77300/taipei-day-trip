@@ -67,174 +67,20 @@ main {
   align-items: center;
 }
 
-
-hr {
-  background-color: #E8E8E8;
-  Width: 1200px;
-  margin-top: 40px;
-  margin-bottom: 0px;
-}
-
-.booking-top {
-  width: 1000px;
-
-  margin-top: 46px;
-}
-
-.booking-title {
-  font-size: 19px;
-  font-weight: bold;
-}
-
-.booking-info {
-  margin-top: 35px;
-  /* outline: 3px solid blue; */
-  display: flex;
-  gap: 22px;
-}
-
-/* .booking-delete {
-  position: relative;
-  top: 50%;
-  right: -39%;
-
-} */
-
-.bookingDelete-btn {
-  cursor: pointer;
-}
-
-.booking-left {
-  /* background-image: url("https://e0.365dm.com/22/12/768x432/skysports-modric-luka-croatia_5991757.jpg?20221209204917"); */
-  height: 200px;
-  width: 266px;
-  background-size: cover;
-  background-position: center center;
-}
-
-.booking-right {
-  /* outline: 3px solid red; */
-  width: 71.4%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.booking-name {
-  font-weight: bold;
-  color: #448899;
-  margin-bottom: 25px;
-}
-
-.schedule-item>.item {
-  padding: 0;
-  margin-right: 5px;
-  font-weight: bold;
-}
-
-.schedule-item {
-  margin-top: 15px;
-}
-
-
-
-.booking-middle {
-  width: 1000px;
-  margin-top: 44px;
-}
-
-.middle-comment {
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 19px;
-  margin-bottom: 5px;
-}
-
-
-.middle-title,
-.bottom-title {
-  font-weight: bold;
-  font-size: 19px;
-}
-
-.booking-form>input {
-  outline: none;
-  border: 1px solid #e8e8e8;
-  width: 180px;
-  height: 18px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.booking-form>.form-control {
-  outline: none;
-  border: 1px solid #e8e8e8;
-  width: 180px;
-  height: 18px;
-  padding: 10px;
-  border-radius: 5px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-
-.booking-form {
-  margin-top: 15px;
-}
-
-.booking-form.first {
-  margin-top: 24px;
-}
-
-.booking-bottom {
-  width: 1000px;
-  margin-top: 44px;
-}
-
-.booking-total {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 1000px;
-  margin-top: 43px;
-  /* outline: 3px solid red; */
-}
-
-.total-fee {
-  font-weight: bold;
-}
-
-#book-and-pay {
-  padding: 5px 20px;
-  width: 173px;
-  height: 36px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  color: #FFFFFF;
-  background-color: #448899;
-  /* line-height: 2px; */
-  margin-top: 25px;
-  cursor: pointer;
-}
-
-/* 如果沒有行程 */
 .no-schedule {
-  margin-top: 35px;
-  display: none;
+  margin-top: 25px;
 }
 
-.booking-info,
-.booking-middle,
-.booking-bottom,
-.booking-total {
-  /* display: none; */
+.thank-top {
+  margin-top: 20px;
+  white-space: pre-wrap;
+  font-weight: bold;
 }
 
-hr {
-  /* display: none; */
+.thank-middle,
+.thank-bottom {
+  margin-top: 20px;
 }
-
 
 .footer {
   /* outline: 3px solid red; */
@@ -250,6 +96,25 @@ hr {
   align-items: center;
 }
 
+.member-footer {
+  /* outline: 3px solid red; */
+  width: 100%;
+
+  background-color: #757575;
+  margin: 0 auto;
+  margin-top: 40px;
+  color: #FFFFFF;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  /* height: 104px; */
+  top: 50%;
+  bottom: 0;
+
+}
+
 .footer-extend {
   background-color: #757575;
   width: 100%;
@@ -258,7 +123,18 @@ hr {
   top: 325px;
   bottom: 0;
   right: 0;
-  display: none;
+  display: block;
+}
+
+.member-footer-extend {
+  background-color: #757575;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 800px;
+  bottom: 0;
+  right: 0;
+  display: block;
 }
 
 /* 彈出視窗 */
@@ -528,63 +404,53 @@ hr {
   font-weight: 500;
 }
 
-.booking-failed {
-  color: red;
-  margin-top: 5px;
+.member-top {
+  width: 1000px;
+  margin-top: 46px;
 }
 
 
-#cardimg {
-  vertical-align: middle;
-  position: relative;
-  right: 45px;
+/* member頁面開始 */
+.member-middle {
+  /* margin-top: 25px; */
+  margin: 25px 5px 0 5px;
+  /* outline: 3px solid red; */
+  /* margin-left: 5px;
+  margin-top: 5px; */
 }
+
+table,
+td {
+  border: 1px solid #666666;
+}
+
+thead {
+  background-color: #448899;
+  color: #fff;
+}
+
+.trip-order,
+.trip-name,
+.trip-date,
+.trip-time,
+.trip-created,
+.trip-status {
+  padding: 5px;
+}
+
+
+/* member頁面結束 */
+
 
 @media (max-width:1220px) {
   .navbar {
     width: 91.7%;
   }
 
-  .booking-top,
-  .booking-bottom,
-  .booking-middle,
-  .booking-total {
-    width: 91.7%;
-  }
-
-
-  hr {
+  .member-top {
     width: 91.7%;
   }
 
 }
 
-@media (max-width: 600px) {
-  .booking-info {
-    display: flex;
-    flex-direction: column;
-    /* gap: 22px; */
-  }
-
-  .booking-left {
-    width: 100%;
-  }
-
-  .booking-right {
-    width: 100%;
-    /* outline: 3px solid blue; */
-  }
-
-  .booking-details {
-    /* outline: 3px solid green; */
-  }
-
-  .booking-delete {
-    /* outline: 3px solid red; */
-  }
-
-  .bookingDelete-btn {
-    position: relative;
-    top: 102%;
-  }
-}
+@media (max-width: 600px) {}

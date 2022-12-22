@@ -66,17 +66,46 @@
     </div>
   </div>
   <main>
-    <h3 class="thank-top">行程預訂成功 您的訂單編號如下 :</h2>
-      <!-- <div class="thank-top">行程預訂成功 您的訂單編號如下 : </div> -->
-      <div class="thank-middle"></div>
-      <div class="thank-bottom">請記住此編號，或到<a href="/member">會員中心</a>查詢歷史訂單</div>
+    <div class="member-top">
+      <div class="top-title">您好，xxx，目前歷史訂單如下 : </div>
+      <div class="no-schedule">目前沒有任何已完成之訂單</div>
+    </div>
+    <div class="member-middle" >
+      <table>
+        <thead>
+          <tr>
+            <th colspan="6" class="all-orders">xxx的台北一日遊歷史訂單</th>
+          <tr>
+            <th>訂單編號</th>
+            <th>景點</th>
+            <th>旅遊日期</th>
+            <th>時間</th>
+            <th>建立日期</th>
+            <th>付款狀態</th>
+          </tr>
+          </tr>
+        </thead>
+        <tbody class="tbody">
+          <tr>
+            <td class="trip-order">The table body</td>
+            <td class="trip-name">with two columns</td>
+            <td class="trip-date">with two columns</td>
+            <td class="trip-time">with two columns</td>
+            <td class="trip-created">with two columns</td>
+            <td class="trip-status">with two columns</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
   </main>
-  <div class="footer">
+  <div class="member-footer">
     COPYRIGHT © 2021 台北一日遊
   </div>
-  <div class="footer-extend"></div>
+  <!-- <div class="member-footer-extend"></div> -->
 
-  <script src="/javascripts/thankyou.js"></script>
+  <script src="/javascripts/member.js"></script>
   <script src="/javascripts/header.js"></script>
 </body>
 

@@ -198,8 +198,8 @@ async function bookNewSchedule(data) {
       document.location.href = '/booking'
     } else if (response.status === 400) {
       console.log(result["message"])
-      bookingFail.textContent=result["message"]
-      bookingFail.style.marginTop="10px"
+      bookingFail.textContent = result["message"]
+      bookingFail.style.marginTop = "10px"
       bookingButton.style.marginTop = "10px"
     }
   } catch (err) {
