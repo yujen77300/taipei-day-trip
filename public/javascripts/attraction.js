@@ -160,13 +160,43 @@ bookingButton.addEventListener('click', function () {
       newBookingData = {}
       newBookingData["attractionId"] = id
       newBookingData["date"] = tripDate.value
+      let today = new Date();
+      today = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + ""
+      console.log("今天")
+      console.log(today)
+      let tomorrow = new Date(today)
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      // en-CA表示法才是YYYY-MM-DD
+      tomorrow = tomorrow.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' })
+      // tomorrow = tomorrow.getFullYear() + "-" + (tomorrow.getMonth() + 1) + "-" + tomorrow.getDate() + ""
       if (parseInt((fee.textContent).substr(3, 4), 0) == 2500) {
         newBookingData["time"] = "afternoon"
       } else {
         newBookingData["time"] = "morning"
       }
       newBookingData["price"] = parseInt((fee.textContent).substr(3, 4), 0)
-      bookNewSchedule(newBookingData)
+      console.log("我在這裡")
+      console.log(newBookingData)
+      console.log(tripDate.value)
+      console.log(tomorrow)
+
+      if (tripDate.value >= tomorrow) {
+        // console.log("近來預定")
+        bookNewSchedule(newBookingData)
+      } else if (tripDate.value == today) {
+        bookingFail.textContent = "無法預訂當天日期，請選擇明天開始之日期"
+        bookingFail.style.marginTop = "10px"
+        bookingButton.style.marginTop = "10px"
+      } else if (tripDate.value.length == 0) {
+        bookingFail.textContent = "要預訂失敗，請選擇日期"
+        bookingFail.style.marginTop = "10px"
+        bookingButton.style.marginTop = "10px"
+      } else if (tripDate.value < today) {
+        bookingFail.textContent = "無法選擇過往日期，請選擇明天開始之日期"
+        bookingFail.style.marginTop = "10px"
+        bookingButton.style.marginTop = "10px"
+      }
+
 
     } else {
       document.querySelector(".popup").classList.add("active");

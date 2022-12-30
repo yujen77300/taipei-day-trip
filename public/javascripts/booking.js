@@ -19,7 +19,26 @@ let footerExtend = document.querySelector('.footer-extend')
 let payBtn = document.getElementById('book-and-pay')
 let scehduledPhone = document.getElementById('scehduled-phone')
 let bookingFailed = document.querySelector('.booking-failed')
+let loading = document.getElementById('load')
+let loadingBkgd = document.querySelector('.loading-background')
 let contactInfo = {}
+
+// import * as dotenv from '/Users/user/Desktop/selfstudy/WeHelp/Phase2 -Assignment/taipei-day-trip/node_modules/dotenv/'
+// import dotenv from 'dotenv'
+// import '../../node_modules/dotenv/config.js'
+// // const dotenv = require('dotenv')
+
+// console.log("我要開始了唷ㄎㄎ")
+// console.log(dotenv.config())
+// // console.log("來印出金鑰機密資訊")
+// console.log(process.env.APP_KEY)
+
+// require(['/node_modules/require.js/require.js'], function (dotenv) {
+//   dotenv.config()
+//   console.log("來印出金鑰機密資訊")
+//   console.log(process.env.APP_KEY)
+
+// });
 
 
 renderBooking()
@@ -68,6 +87,10 @@ function renderBooking() {
             topTitle.textContent = `您好，${data["data"]["name"]}，待預訂的行程如下 : `
             scehduledUsername.value = data["data"]["name"]
             scehduledEmail.value = data["data"]["email"]
+            // 如果有機號碼有資訊就改，如果沒有顯示placeholder的
+            if ((data["data"]["phone"]).length > 0){
+              scehduledPhone.value = data["data"]["phone"]
+            }
           })
           bookingName.textContent = `台北一日遊 : ${data["data"]["attraction"]["name"]}`
           scheduledDate.innerHTML = `<span class="item">日期 : </span>${data["data"]["date"]}`
@@ -128,7 +151,8 @@ script.src = 'https://js.tappaysdk.com/sdk/tpdirect/v5.14.0';
 document.body.appendChild(script);
 // 不同方法
 script.onload = function () {
-  TPDirect.setupSDK(126872, 'app_z3MEtsU26A8DBBkkioGuBcHyXdG5S3k3C8g9CbHNkrwFfa7EmTf4guG6jvwF', 'sandbox')
+
+  TPDirect.setupSDK(`${APP_ID}`, `${APP_KEY}`, 'sandbox')
   TPDirect.card.setup({
     fields: {
       number: {
@@ -231,11 +255,6 @@ script.onload = function () {
 
   // 監聽點擊按鈕
   payBtn.addEventListener('click', function () {
-
-
-    // 先確認是否手機、信用卡日期、cvv都有資料
-    console.log(typeof (scehduledPhone.value))
-    console.log(TPDirect.card.getTappayFieldsStatus())
     // 確認是否可以getprime
     if (TPDirect.card.getTappayFieldsStatus().canGetPrime === false) {
       bookingFailed.textContent = "請輸入正確信用卡資訊"
@@ -246,8 +265,7 @@ script.onload = function () {
     } else {
       // Get prime
       TPDirect.card.getPrime((result) => {
-        +
-          console.log('成功後的狀態 : ')
+        console.log('成功後的狀態 : ')
         console.log(result)
         if (result.status !== 0) {
           alert('get prime error ' + result.msg)
@@ -307,6 +325,12 @@ async function payByPrime(data) {
       "Content-type": "application/json",
     }
   }
+  // background = document.createElement('div')
+  // background.className = "background"
+  // background.style.cssText = 'background-color: rgba(15, 15, 15, 0.25);z-index:1;position:absolute;left:0;right:0;top:0;bottom:0;'
+  // body.appendChild(background)
+  loading.style.display = "block"
+  loadingBkgd.style.display = "block"
   try {
     let response = await fetch(url, options);
     let result = await response.json();

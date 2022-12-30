@@ -48,6 +48,7 @@ h2 {
 
 .item-section {
   display: flex;
+    align-items: center;
 }
 
 .item {
@@ -96,8 +97,7 @@ main {
   align-items: center;
 }
 
-.member-footer {
-  /* outline: 3px solid red; */
+/* .member-footer {
   width: 100%;
 
   background-color: #757575;
@@ -109,11 +109,10 @@ main {
   justify-content: center;
   align-items: center;
   position: absolute;
-  /* height: 104px; */
   top: 50%;
   bottom: 0;
 
-}
+} */
 
 .footer-extend {
   background-color: #757575;
@@ -126,7 +125,7 @@ main {
   display: block;
 }
 
-.member-footer-extend {
+/* .member-footer-extend {
   background-color: #757575;
   width: 100%;
   position: absolute;
@@ -135,7 +134,7 @@ main {
   bottom: 0;
   right: 0;
   display: block;
-}
+} */
 
 /* 彈出視窗 */
 /* * {
