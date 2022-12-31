@@ -11,13 +11,24 @@
 
 <body class="body">
   <header>
+    <div class="burger-list"></div>
     <nav class="navbar">
       <h2 onclick="window.location='/'">台北一日遊</h2>
+      <div class="burger">☰</div>
+
       <div class="item-section">
+        <div class="item" id="member-btn">會員中心</div>
         <div class="item" id="schedule-btn">預訂行程</div>
         <div class="item" id="login-logout">登入/註冊</div>
+        <div class="burger-close"><img src="/picture/burgerclose.png" style="width: 16px;height:16px"></div>
+        <div class="bar-avator">
+        </div>
+
       </div>
+      <div class="smallPX-bar-avator"></div>
+
     </nav>
+
   </header>
   <div class="popup">
     <div class=login-bar></div>
@@ -72,7 +83,7 @@
       <!-- 輸入景點名稱查詢 -->
       <div class="input-group">
         <div class="searchbg">
-          <input type="text" name="keyword" class="search-bar" placeholder="輸入景點名稱查詢" aria-describedby="search-button">
+          <input type="text" name="keyword" class="search-bar" placeholder="輸入景點類別查詢" aria-describedby="search-button">
         </div>
         <div class="input-icon">
           <button type="button" id="search-button" onclick="getAttraction()"><img src="/picture/search.png"></button>

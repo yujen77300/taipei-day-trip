@@ -17,6 +17,10 @@ let signupSuccess = document.getElementById("signup-success")
 let loginLogout = document.getElementById("login-logout")
 // 預定行程
 let scheduleBtn = document.getElementById("schedule-btn")
+let memberBtn = document.getElementById("member-btn")
+// 大頭貼
+let smallPxAvator = document.querySelector('.smallPX-bar-avator')
+let barAvator = document.querySelector(".bar-avator")
 
 // 假設有沒有顯示loginpopup視窗
 let loginPopup = 0
@@ -317,7 +321,7 @@ function signup() {
       signupFail.textContent = "信箱格式錯誤"
       signupEmail.value = ""
     } else if (!passwordValidation(signupInputPassword)) {
-      signupFail.textContent = "密碼須包含至少一個數字與一個英文字母"
+      signupFail.textContent = "密碼至少4位數，且包含至少一個數字與一個英文字母"
       signupPassword.value = ""
     } else {
       let signupData = {
@@ -495,6 +499,23 @@ function reload() {
   }).then(function (data) {
     if (data.data != undefined) {
       loginLogout.textContent = "登出系統"
+      if (data.data["avatorName"] == "user.png") {
+        barAvator.style.backgroundImage = "url(/picture/profile.png)"
+        smallPxAvator.style.backgroundImage = "url(/picture/profile.png)"
+      } else {
+        smallPxAvator.style.backgroundImage = `url('${data.data["avatorUrl"]}')`
+        barAvator.style.backgroundImage = `url('${data.data["avatorUrl"]}')`
+      }
+      barAvator.style.width = "20px"
+      barAvator.style.height = "20px"
+      barAvator.style.borderRadius = "50%"
+      barAvator.style.backgroundSize = "cover"
+      barAvator.style.backgroundPosition = "center center"
+      smallPxAvator.style.width = "20px"
+      smallPxAvator.style.height = "20px"
+      smallPxAvator.style.borderRadius = "50%"
+      smallPxAvator.style.backgroundSize = "cover"
+      smallPxAvator.style.backgroundPosition = "center center"
     } else {
       loginLogout.textContent = "登入/註冊"
     }
@@ -503,7 +524,7 @@ function reload() {
 
 
 // 預定行程相關
-document.getElementById("schedule-btn").addEventListener('click', function () {
+scheduleBtn.addEventListener('click', function () {
   fetch(
     "/api/user/auth"
   ).then(function (response) {
@@ -520,4 +541,44 @@ document.getElementById("schedule-btn").addEventListener('click', function () {
       body.style.overflow = "hidden"
     }
   })
+})
+
+
+memberBtn.addEventListener('click', function () {
+  fetch(
+    "/api/user/auth"
+  ).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    if (data.data != undefined) {
+      document.location.href = '/member'
+    } else {
+      document.querySelector(".popup").classList.add("active");
+      background = document.createElement('div')
+      background.className = "background"
+      background.style.cssText = 'background-color: rgba(15, 15, 15, 0.25);z-index:1;position:absolute;left:0;right:0;top:0;bottom:0;'
+      body.appendChild(background)
+      body.style.overflow = "hidden"
+    }
+  })
+})
+
+const burger = document.querySelector('.burger')
+const itemSection = document.querySelector('.item-section')
+const burgerClose = document.querySelector('.burger-close')
+
+burger.addEventListener('click', function () {
+  itemSection.style.display = "flex"
+  itemSection.style.top = 0
+  barAvator.style.top = '-100%'
+  burger.style.top = '-100%'
+  burgerClose.style.top = '20px'
+})
+
+burgerClose.addEventListener('click', function () {
+  burger.style.top = '15px'
+  itemSection.style.top = '-100%'
+  burgerClose.style.top = '-100%'
+  // barAvator.style.display = 'block'
+  // smallPxAvator.style.display = 'none'
 })

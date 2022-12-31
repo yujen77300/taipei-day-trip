@@ -38,7 +38,7 @@ function signup() {
       signupFail.textContent = "信箱格式錯誤"
       signupEmail.value = ""
     } else if (!passwordValidation(signupInputPassword)) {
-      signupFail.textContent = "密碼須包含至少一個數字與一個英文字母"
+      signupFail.textContent = "密碼至少4位數，且包含至少一個數字與一個英文字母"
       signupPassword.value = ""
     } else {
       let signupData = {
@@ -206,6 +206,21 @@ function tologin() {
   signupPassword.value = ""
 }
 
+// reload()
+// function reload() {
+//   fetch(
+//     "/api/user/auth"
+//   ).then(function (response) {
+//     return response.json();
+//   }).then(function (data) {
+//     if (data.data != undefined) {
+//       loginLogout.textContent = "登出系統"
+//     } else {
+//       loginLogout.textContent = "登入/註冊"
+//     }
+//   })
+// }
+let barAvator = document.querySelector(".bar-avator")
 reload()
 function reload() {
   fetch(
@@ -215,6 +230,16 @@ function reload() {
   }).then(function (data) {
     if (data.data != undefined) {
       loginLogout.textContent = "登出系統"
+      if (data.data["avatorName"] == "user.png") {
+        barAvator.style.backgroundImage = "url(/picture/profile.png)"
+      } else {
+        barAvator.style.backgroundImage = `url('${data.data["avatorUrl"]}')`
+      }
+      barAvator.style.width = "20px"
+      barAvator.style.height = "20px"
+      barAvator.style.borderRadius = "50%"
+      barAvator.style.backgroundSize = "cover"
+      barAvator.style.backgroundPosition = "center center"
     } else {
       loginLogout.textContent = "登入/註冊"
     }
@@ -222,7 +247,7 @@ function reload() {
 }
 
 // 預訂行程
-document.getElementById("schedule-btn").addEventListener('click', function () {
+scheduleBtn.addEventListener('click', function () {
   fetch(
     "/api/user/auth"
   ).then(function (response) {
@@ -232,6 +257,26 @@ document.getElementById("schedule-btn").addEventListener('click', function () {
       // 如果有存在資料就跳到預訂行程
       //這邊還要動用資料庫
       document.location.href = '/booking'
+    } else {
+      document.querySelector(".popup").classList.add("active");
+      background = document.createElement('div')
+      background.className = "background"
+      background.style.cssText = 'background-color: rgba(15, 15, 15, 0.25);z-index:1;position:absolute;left:0;right:0;top:0;bottom:0;'
+      body.appendChild(background)
+      body.style.overflow = "hidden"
+    }
+  })
+})
+
+let memberBtn = document.getElementById("member-btn")
+memberBtn.addEventListener('click', function () {
+  fetch(
+    "/api/user/auth"
+  ).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    if (data.data != undefined) {
+      document.location.href = '/member'
     } else {
       document.querySelector(".popup").classList.add("active");
       background = document.createElement('div')

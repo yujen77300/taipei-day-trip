@@ -14,8 +14,10 @@
     <nav class="navbar">
       <h2 onclick="window.location='/'">台北一日遊</h2>
       <div class="item-section">
+        <div class="item" id="member-btn">會員中心</div>
         <div class="item" id="schedule-btn">預訂行程</div>
         <div class="item" id="login-logout">登入/註冊</div>
+        <div class="bar-avator"></div>
       </div>
     </nav>
   </header>
@@ -108,7 +110,7 @@
         </div>
         <div class="booking-form">
           <label for="phone">手機號碼 : </label>
-          <input type="tel" id="scehduled-phone"  placeholder="ex : +886912345678" required>
+          <input type="tel" id="scehduled-phone" placeholder="ex : +886912345678" required>
         </div>
       </div>
       <div class="middle-comment">請保持手機暢通，準時到達，導覽人員將用手機與您聯絡，務必留下正確的聯絡方式</div>
@@ -118,21 +120,15 @@
       <div class="bottom-title">信用卡付款資訊</div>
       <div class="payment-info">
         <div class="booking-form first">
-          <!-- <label for="ccn">卡片號碼 : </label>
-          <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number"
-            maxlength="19" > -->
           <label for="card-number" class="control-label"><span id="cardtype"></span>卡片號碼 : </label>
           <div class="form-control card-number"></div><img id="cardimg">
         </div>
         <div class="booking-form">
-          <!-- <label for="expiry">過期時間 : </label>
-          <input class="inputCard" name="expiry" id="expiry" type="text" placeholder="MM/YY" required> -->
           <label for="expiration-date" class="control-label">過期時間 : </label>
           <div class="form-control expiration-date" id="tappay-expiration-date"></div>
         </div>
         <div class="booking-form">
-          <!-- <label for="CVV">驗證密碼 : </label>
-          <input type="tel" id="CVV" placeholder="CVV" required> -->
+
           <label for="cvv" class="control-label">驗證密碼 : </label>
           <div class="form-control cvv"></div>
         </div>
@@ -155,58 +151,24 @@
   <div class="footer">
     COPYRIGHT © 2021 台北一日遊
   </div>
-  <div class="footer-extend"></div>
+  <!-- <div class="loadtest"> -->
+  <div id="load">
+    <div>G</div>
+    <div>N</div>
+    <div>I</div>
+    <div>D</div>
+    <div>A</div>
+    <div>O</div>
+    <div>L</div>
+  </div>
+  <!-- </div> -->
 
-  <script src="/javascripts/booking.js"></script>
+  <div class="loading-background"></div>
+  <div class="footer-extend"></div>
+  <script type="text/javascript" src="{{ url_for('static', filename='javascripts/tappay.js')}}"></script>
+  <!-- <script src="/node_modules/require.js/require.js"></script> -->
+  <script type="module" src="/javascripts/booking.js"></script>
   <script src="/javascripts/header.js"></script>
-  <!-- <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script> -->
-  <!-- <script>TPDirect.setupSDK(126872, 'app_z3MEtsU26A8DBBkkioGuBcHyXdG5S3k3C8g9CbHNkrwFfa7EmTf4guG6jvwF', 'sandbox')</script>
-  <script>
-    TPDirect.card.setup({
-      fields: {
-        number: {
-          element: '.form-control.card-number',
-          placeholder: '**** **** **** ****'
-        },
-        expirationDate: {
-          element: document.getElementById('tappay-expiration-date'),
-          placeholder: 'MM / YY'
-        },
-        ccv: {
-          element: document.querySelector('.form-control.cvv'),
-          placeholder: 'CVV'
-        }
-      },
-      styles: {
-        'input': {
-          'color': 'gray'
-        },
-        'input.ccv': {
-          // 'font-size': '16px'
-        },
-        ':focus': {
-          'color': 'black'
-        },
-        '.valid': {
-          'color': 'green'
-        },
-        '.invalid': {
-          'color': 'red'
-        },
-        '@media screen and (max-width: 400px)': {
-          'input': {
-            'color': 'orange'
-          }
-        }
-      },
-      // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
-      isMaskCreditCardNumber: true,
-      maskCreditCardNumberRange: {
-        beginIndex: 6,
-        endIndex: 11
-      }
-    })
-  </script> -->
 </body>
 
 </html>

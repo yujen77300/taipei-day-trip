@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taipei trip 台北一日遊2.0</title>
-  <link rel="stylesheet" href="/stylesheets/thankyou.css">
+  <link rel="stylesheet" href="/stylesheets/member.css">
 </head>
 
 <body class="body">
@@ -14,8 +14,10 @@
     <nav class="navbar">
       <h2 onclick="window.location='/'">台北一日遊</h2>
       <div class="item-section">
+        <div class="item" id="member-btn">會員中心</div>
         <div class="item" id="schedule-btn">預訂行程</div>
         <div class="item" id="login-logout">登入/註冊</div>
+        <div class="bar-avator"></div>
       </div>
     </nav>
   </header>
@@ -65,12 +67,165 @@
       </div>
     </div>
   </div>
-  <main>
-    <div class="member-top">
+  <div class="container">
+    <div class="member-left">
+      <div class="left-bar">
+        <div class="left-bar-username">dylan</div>
+        <div class="left-bar-edit">
+          <img class="edit-icon" src="/picture/edit.png" style="width:16px;height:16px;">
+          <div class="edit-descirption">編輯個人資料</div>
+        </div>
+      </div>
+      <div class="left-info">
+        <div class="info-item" id="my-info">
+          <img class="profile-icon" src="/picture/profile.png" style="width:16px;height:16px;">
+          <div class="edit-descirption">我的帳戶</div>
+        </div>
+        <div class="info-item" id="update-pwd">
+          <img class="lock-icon" src="/picture/lock.png" style="width:16px;height:16px;">
+          <div class="edit-descirption">更改密碼</div>
+        </div>
+        <div class="info-item" id="shopping-list">
+          <img class="list-icon" src="/picture/list.png" style="width:16px;height:16px;">
+          <div class="edit-descirption">購買清單</div>
+        </div>
+      </div>
+    </div>
+    <div class="member-right">
+      <div class="right-bar">
+        <div style="margin-bottom:5px;font-weight: bold;">我的檔案</div>
+        <div style="font-size:14px;">管理你的檔案與檢視購買清單</div>
+      </div>
+      <div class="right-body">
+        <!-- 會員資料開始 -->
+        <div class="info-right-body">
+          <div class="body-left">
+            <form>
+              <div class="edit-item">
+                <div class="username-item">
+                  <div class="username">
+                    <label>使用者帳號</label>
+                  </div>
+                  <div class="username-info">dylan</div>
+                </div>
+              </div>
+              <div class="edit-item">
+                <div class="email-item">
+                  <div class="email">
+                    <label>Email</label>
+                  </div>
+                  <div class="email-info">
+                    <div class="email-input">
+                      <input type="text" class="email-input-box" value="dylan@gmail.com">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="edit-item">
+                <div class="phone-item">
+                  <div class="phone">
+                    <label>phone</label>
+                  </div>
+                  <div class="phone-info">
+                    <div class="phone-input">
+                      <input type="text" class="phone-input-box" placeholder="+886987654321">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="buttom-edit-item">
+                <button class="info-edit-btn" type="button">儲存</button>
+              </div>
+            </form>
+          </div>
+          <div class="body-right">
+            <div class="right-section">
+              <div class="avator"></div>
+              <input type="file" class="avator-upload-input" name="file" accept=".jpeg,.jpg.png">
+              <button class="avator-upload-button" type="button">選擇圖片</button>
+              <div class="avator-comment">
+                <div class="avator-max">檔案名稱:須為英文或數字</div>
+                <div class="avator-file">檔案限制: .JPEG, .PNG</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 會員資料結束 -->
+        <!-- 密碼資料開始 -->
+        <div class="pwd-right-body">
+          <div class="pwd-item">
+            <div class="old-pwd-item">
+              <div class="old-pwd">
+                <label>現在的密碼</label>
+              </div>
+              <input type="password" class="old-pwd-box" placeholder="請輸入現在的密碼">
+            </div>
+          </div>
+          <div class="pwd-item">
+            <div class="new-pwd-item">
+              <div class="new-pwd">
+                <label>新的密碼</label>
+              </div>
+              <input type="password" class="new-pwd-box" placeholder="請輸入新的密碼">
+            </div>
+          </div>
+          <div class="pwd-item">
+            <div class="repeat-pwd-item">
+              <div class="repeat-pwd">
+                <label>確認密碼</label>
+              </div>
+              <input type="password" class="repeat-pwd-box" placeholder="請再輸入一次新的密碼">
+            </div>
+          </div>
+          <div class="pwd-hint"></div>
+          <div class="pwd-edit-item">
+            <button class="pwd-edit-btn" type="button">儲存</button>
+          </div>
+        </div>
+        <!-- 密碼資料結束 -->
+        <!-- 歷史清單開始 -->
+        <div class="list-right-body">
+          <div class="member-top">
+            <div class="top-title">目前歷史訂單如下 : </div>
+            <div class="no-schedule">目前沒有任何已完成之訂單</div>
+          </div>
+          <div class="member-middle">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="6" class="all-orders">您的台北一日遊歷史訂單</th>
+                <tr>
+                  <th>訂單編號</th>
+                  <th>景點</th>
+                  <th>旅遊日期</th>
+                  <th>時間</th>
+                  <th>建立日期</th>
+                  <th>付款狀態</th>
+                </tr>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr>
+                  <td class="trip-order">The table body</td>
+                  <td class="trip-name">with two columns</td>
+                  <td class="trip-date">with two columns</td>
+                  <td class="trip-time">with two columns</td>
+                  <td class="trip-created">with two columns</td>
+                  <td class="trip-status">with two columns</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- 歷史清單結束 -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="member-top">
       <div class="top-title">您好，xxx，目前歷史訂單如下 : </div>
       <div class="no-schedule">目前沒有任何已完成之訂單</div>
     </div>
-    <div class="member-middle" >
+    <div class="member-middle">
       <table>
         <thead>
           <tr>
@@ -96,12 +251,13 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
 
 
-  </main>
-  <div class="member-footer">
+  </div>
+  <div class="footer">
     COPYRIGHT © 2021 台北一日遊
+    <!-- <div class="footer-description">COPYRIGHT © 2021 台北一日遊</div> -->
   </div>
   <!-- <div class="member-footer-extend"></div> -->
 
